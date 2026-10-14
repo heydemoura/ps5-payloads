@@ -3,6 +3,21 @@
   "icons_url": "icons.json",
   "payloads": [
     {
+      "id": "ps5-localsend",
+      "name": "PS5 LocalSend",
+      "filename": "ps5-localsend.elf",
+      "url": "https://github.com/heydemoura/ps5-localsend/releases/download/v0.1.0/ps5-localsend.elf",
+      "description": "Native LocalSend protocol payload for PlayStation 5 with a browser dashboard",
+      "version": "v0.1.0",
+      "last_update": "2026-10-14",
+      "category": "Networking",
+      "author": "heydemoura",
+      "icon_key": "ps5-localsend",
+      "details_url": "details/ps5-localsend.md",
+      "source": "https://github.com/heydemoura/ps5-localsend",
+      "release_notes": "Initial public release of PS5 LocalSend.\n\n## Features\n\n- Native LocalSend protocol implementation for PS5\n- Browser-based dashboard for file management\n- Send and receive files wirelessly between devices\n- Persistent receive folder selection\n\nLoad the payload on your PS5 via an ELF loader (port 9021):\n\n```sh\nnc -q0 <ps5-ip> 9021 < ps5-localsend.elf\n```\n\nThen open the dashboard URL shown on screen. Use any LocalSend-compatible app to send and receive files."
+    },
+    {
       "id": "syncps5",
       "name": "SyncPS5",
       "filename": "syncps5-v0.2.0.elf",
