@@ -1,0 +1,21 @@
+{
+  "name": "heydemoura's PS5 Payloads",
+  "icons_url": "icons.json",
+  "payloads": [
+    {
+      "id": "syncps5",
+      "name": "SyncPS5",
+      "filename": "syncps5-v0.2.0.elf",
+      "url": "https://github.com/heydemoura/syncps5/releases/download/v0.2.0/syncps5-v0.2.0.elf",
+      "description": "Syncthing running on a jailbroken PS5 as an ELF payload service",
+      "version": "v0.2.0",
+      "last_update": "2026-10-08",
+      "category": "Utilities",
+      "author": "heydemoura",
+      "icon_key": "syncps5",
+      "details_url": "details/syncps5.md",
+      "source": "https://github.com/heydemoura/syncps5",
+      "release_notes": ""
+    }
+  ]
+}

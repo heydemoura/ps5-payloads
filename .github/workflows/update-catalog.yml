@@ -1,0 +1,113 @@
+name: Update Payload Catalog
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [update-catalog]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update payloads.json
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          declare -A REPO_NAME REPO_DESC REPO_CATEGORY REPO_ICON
+          REPOS=("heydemoura/ps5-localsend" "heydemoura/syncps5")
+
+          REPO_NAME["heydemoura/ps5-localsend"]="PS5 LocalSend"
+          REPO_DESC["heydemoura/ps5-localsend"]="Native LocalSend protocol payload for PlayStation 5 with a browser dashboard"
+          REPO_CATEGORY["heydemoura/ps5-localsend"]="Networking"
+          REPO_ICON["heydemoura/ps5-localsend"]="ps5-localsend"
+
+          REPO_NAME["heydemoura/syncps5"]="SyncPS5"
+          REPO_DESC["heydemoura/syncps5"]="Syncthing running on a jailbroken PS5 as an ELF payload service"
+          REPO_CATEGORY["heydemoura/syncps5"]="Utilities"
+          REPO_ICON["heydemoura/syncps5"]="syncps5"
+
+          PAYLOADS="[]"
+
+          for repo in "${REPOS[@]}"; do
+            id="${repo#*/}"
+            name="${REPO_NAME[$repo]}"
+            description="${REPO_DESC[$repo]}"
+            category="${REPO_CATEGORY[$repo]}"
+            icon_key="${REPO_ICON[$repo]}"
+            author="${repo%/*}"
+
+            release=$(gh api "repos/$repo/releases/latest" 2>/dev/null) || continue
+
+            tag=$(echo "$release" | jq -r '.tag_name')
+            published=$(echo "$release" | jq -r '.published_at' | cut -dT -f1)
+            release_notes=$(echo "$release" | jq -r '.body // ""')
+
+            asset=$(echo "$release" | jq -r '[.assets[] | select(.name | endswith(".elf"))][0] // empty')
+            [ -z "$asset" ] && continue
+
+            filename=$(echo "$asset" | jq -r '.name')
+            url=$(echo "$asset" | jq -r '.browser_download_url')
+
+            entry=$(jq -n \
+              --arg id "$id" \
+              --arg name "$name" \
+              --arg filename "$filename" \
+              --arg url "$url" \
+              --arg description "$description" \
+              --arg version "$tag" \
+              --arg last_update "$published" \
+              --arg category "$category" \
+              --arg author "$author" \
+              --arg icon_key "$icon_key" \
+              --arg details_url "details/${id}.md" \
+              --arg source "https://github.com/$repo" \
+              --arg release_notes "$release_notes" \
+              '{
+                id: $id,
+                name: $name,
+                filename: $filename,
+                url: $url,
+                description: $description,
+                version: $version,
+                last_update: $last_update,
+                category: $category,
+                author: $author,
+                icon_key: $icon_key,
+                details_url: $details_url,
+                source: $source,
+                release_notes: $release_notes
+              }')
+
+            PAYLOADS=$(echo "$PAYLOADS" | jq --argjson entry "$entry" '. += [$entry]')
+          done
+
+          jq -n \
+            --arg name "heydemoura's PS5 Payloads" \
+            --arg icons_url "icons.json" \
+            --argjson payloads "$PAYLOADS" \
+            '{
+              name: $name,
+              icons_url: $icons_url,
+              payloads: $payloads
+            }' > payloads.json
+
+          cat payloads.json
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add payloads.json
+          if ! git diff --staged --quiet; then
+            git commit -m "Update payload catalog"
+            git push
+          else
+            echo "No changes to payloads.json"
+          fi
