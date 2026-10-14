@@ -55,6 +55,17 @@ jobs:
             filename=$(echo "$asset" | jq -r '.name')
             url=$(echo "$asset" | jq -r '.browser_download_url')
 
+            checksum=""
+            sha_asset=$(echo "$release" | jq -r '[.assets[] | select(.name | test("sha256|SHA256"))][0].browser_download_url // empty')
+            if [ -n "$sha_asset" ]; then
+              sha_content=$(curl -sL "$sha_asset")
+              checksum=$(echo "$sha_content" | grep -i "$filename" | awk '{print $1}')
+              [ -z "$checksum" ] && checksum=$(echo "$sha_content" | head -1 | awk '{print $1}')
+            fi
+            if [ -z "$checksum" ]; then
+              curl -sL "$url" -o /tmp/payload.elf && checksum=$(sha256sum /tmp/payload.elf | awk '{print $1}') && rm -f /tmp/payload.elf
+            fi
+
             entry=$(jq -n \
               --arg id "$id" \
               --arg name "$name" \
@@ -64,6 +75,7 @@ jobs:
               --arg version "$tag" \
               --arg last_update "$published" \
               --arg category "$category" \
+              --arg checksum "$checksum" \
               --arg author "$author" \
               --arg icon_key "$icon_key" \
               --arg details_url "details/${id}.md" \
@@ -78,6 +90,7 @@ jobs:
                 version: $version,
                 last_update: $last_update,
                 category: $category,
+                checksum: $checksum,
                 author: $author,
                 icon_key: $icon_key,
                 details_url: $details_url,
