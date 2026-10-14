@@ -15,7 +15,7 @@
       "icon_key": "syncps5",
       "details_url": "details/syncps5.md",
       "source": "https://github.com/heydemoura/syncps5",
-      "release_notes": ""
+      "release_notes": "Send the payload to an ELF loader on the PS5 (port 9021), e.g.:\n\n```sh\nnc -q0 <ps5-ip> 9021 < syncps5-v0.2.0.elf\n```\n\nThen open `http://<ps5-ip>:8384` and set a GUI password first. See the README for installing it at `/data/syncps5/syncps5.elf` (needed for restart from the GUI and for autoloaders).\n\n\n**Full Changelog**: https://github.com/heydemoura/syncps5/compare/v0.1.0...v0.2.0"
     }
   ]
 }
