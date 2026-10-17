@@ -20,8 +20,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          declare -A REPO_NAME REPO_DESC REPO_CATEGORY REPO_ICON
-          REPOS=("heydemoura/ps5-localsend" "heydemoura/syncps5")
+          declare -A REPO_NAME REPO_DESC REPO_CATEGORY REPO_ICON REPO_ASSET
+          REPOS=("heydemoura/ps5-localsend" "heydemoura/syncps5" "heydemoura/ps5-hltb")
 
           REPO_NAME["heydemoura/ps5-localsend"]="PS5 LocalSend"
           REPO_DESC["heydemoura/ps5-localsend"]="Native LocalSend protocol payload for PlayStation 5 with a browser dashboard"
@@ -32,6 +32,12 @@ jobs:
           REPO_DESC["heydemoura/syncps5"]="Syncthing running on a jailbroken PS5 as an ELF payload service"
           REPO_CATEGORY["heydemoura/syncps5"]="Utilities"
           REPO_ICON["heydemoura/syncps5"]="syncps5"
+
+          REPO_NAME["heydemoura/ps5-hltb"]="PS5 HowLongToBeat"
+          REPO_DESC["heydemoura/ps5-hltb"]="Native home-screen completion estimates for PS5 games with a persistent 30-day cache"
+          REPO_CATEGORY["heydemoura/ps5-hltb"]="Utilities"
+          REPO_ICON["heydemoura/ps5-hltb"]="ps5-hltb"
+          REPO_ASSET["heydemoura/ps5-hltb"]="hltb.elf"
 
           PAYLOADS="[]"
 
@@ -49,7 +55,8 @@ jobs:
             published=$(echo "$release" | jq -r '.published_at' | cut -dT -f1)
             release_notes=$(echo "$release" | jq -r '.body // ""')
 
-            asset=$(echo "$release" | jq -r '[.assets[] | select(.name | endswith(".elf"))][0] // empty')
+            asset=$(echo "$release" | jq --arg filename "${REPO_ASSET[$repo]:-}" \
+              '[.assets[] | select(if $filename == "" then (.name | endswith(".elf")) else .name == $filename end)][0] // empty')
             [ -z "$asset" ] && continue
 
             filename=$(echo "$asset" | jq -r '.name')
