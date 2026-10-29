@@ -49,6 +49,22 @@
       "details_url": "details/ps5-hltb.md",
       "source": "https://github.com/heydemoura/ps5-hltb",
       "release_notes": "## Native completion metrics and game-switch stability\n\nDownload **hltb.elf** and send it to elfldr. The single payload installs and enables the metrics panel. **hltb-query.elf** is an optional stdout query diagnostic. **SHA256SUMS** covers both files.\n\n- Show Main Story, Main + Extra, and Completionist estimates in one native panel for every matched game, including games without played time.\n- Keep the panel visible with Play Game unfocused, using fixed screen placement and consistent native typography, padding, translucent background, and rounded corners. Preserve the original title and played-time controls.\n- Fix the repeated game-switch crash by hosting the panel outside React's managed widget tree. Keep one active panel, coalesce navigation events, release old selection handles on the UI thread, and run at most one background lookup at a time.\n- Cache all three estimates for 30 days in `/user/hltb/cache.json`. Valid saved results display without another network request and survive reboot. Migrate the previous temporary cache automatically.\n- Build and publish release payloads automatically with GitHub Actions. Pull requests run the same build and sanitizer tests.\n\nValidation includes host ASan/UBSan tests for 2,000 game switches, 100,000 coalesced updates, construction failures, and 1,000 network lookups with resource accounting. Console checks on firmware 12.20 confirmed repeated switching and visibility without Play Game focus; the README includes a native ASTRO BOT screenshot.\n\nOnly firmware **12.20** has been tested. Estimates depend on HowLongToBeat's unofficial website API and title matching; missing extra/completionist estimates display `N/A`. Restart ShellUI or reboot before loading this version over an older resident payload."
+    },
+    {
+      "id": "ps5-web-stream",
+      "name": "PS5 Web Stream",
+      "filename": "ps5-web-stream.elf",
+      "url": "https://github.com/heydemoura/ps5-web-stream/releases/download/0.1.0/ps5-web-stream.elf",
+      "description": "Stream PS5 video and stereo audio to a browser or OBS with a built-in dashboard and fullscreen player",
+      "version": "0.1.0",
+      "last_update": "2026-10-29",
+      "category": "Streaming",
+      "checksum": "3bc343273762c779f2f7b74f17c62beec2fabd5e0a9d8301038ebe743e3457e1",
+      "author": "heydemoura",
+      "icon_key": "ps5-web-stream",
+      "details_url": "details/ps5-web-stream.md",
+      "source": "https://github.com/heydemoura/ps5-web-stream",
+      "release_notes": "Initial release of PS5 Web Stream.\n\n- Stream H.264 video and stereo AAC audio to a browser over HTTP-FLV.\n- Open the dashboard at `http://<ps5-ip>:8080/` or fullscreen player at `/player`.\n- Choose 720p, 1080p, 1440p or 4K capture from the player settings.\n- Use `/player?controls=0` for a clean browser or OBS feed.\n- Set `mute=0` for unmuted playback or `resolution=1` through `4` to select 720p through 4K.\n\nLoad `ps5-web-stream.elf` through an ELF loader on port 9021, then open the dashboard URL from a browser on the same network. See the README for OBS setup and query options."
     }
   ]
 }
