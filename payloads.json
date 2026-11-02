@@ -65,6 +65,22 @@
       "details_url": "details/ps5-perf.md",
       "source": "https://github.com/heydemoura/ps5-perf",
       "release_notes": "First release of ps5-perf, a perf-style sampling profiler payload for the PS5.\n\n**Assets**\n- `ps5-perf.elf`: the payload. Send it to elfldr, e.g. `nc -q0 <ps5> 9021 < ps5-perf.elf`. It listens on TCP port 9077.\n- `ps5perf.py`: the host client (Python 3). It records, symbolizes Sony NIDs and writes perf-script text, folded stacks, an SVG flame graph and reports.\n\nBuilt with ps5-payload-dev SDK v0.45 and tested on firmware 12.20. Kernel struct thread offsets are calibrated at runtime. See the README for commands, sampling modes and limitations.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)"
+    },
+    {
+      "id": "ps5-web-stream",
+      "name": "PS5 Web Stream",
+      "filename": "ps5-web-stream.elf",
+      "url": "https://github.com/heydemoura/ps5-web-stream/releases/download/0.1.0/ps5-web-stream.elf",
+      "description": "Stream PS5 video and stereo audio to a browser or OBS with a built-in dashboard and fullscreen player",
+      "version": "0.1.0",
+      "last_update": "2026-10-29",
+      "category": "Streaming",
+      "checksum": "3bc343273762c779f2f7b74f17c62beec2fabd5e0a9d8301038ebe743e3457e1",
+      "author": "heydemoura",
+      "icon_key": "ps5-web-stream",
+      "details_url": "details/ps5-web-stream.md",
+      "source": "https://github.com/heydemoura/ps5-web-stream",
+      "release_notes": "**Full Changelog**: https://github.com/heydemoura/ps5-web-stream/commits/0.1.0"
     }
   ]
 }
