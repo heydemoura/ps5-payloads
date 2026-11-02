@@ -21,7 +21,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           declare -A REPO_NAME REPO_DESC REPO_CATEGORY REPO_ICON REPO_ASSET
-          REPOS=("heydemoura/ps5-localsend" "heydemoura/syncps5" "heydemoura/ps5-hltb")
+          REPOS=("heydemoura/ps5-localsend" "heydemoura/syncps5" "heydemoura/ps5-hltb" "heydemoura/ps5-perf")
 
           REPO_NAME["heydemoura/ps5-localsend"]="PS5 LocalSend"
           REPO_DESC["heydemoura/ps5-localsend"]="Native LocalSend protocol payload for PlayStation 5 with a browser dashboard"
@@ -38,6 +38,12 @@ jobs:
           REPO_CATEGORY["heydemoura/ps5-hltb"]="Utilities"
           REPO_ICON["heydemoura/ps5-hltb"]="ps5-hltb"
           REPO_ASSET["heydemoura/ps5-hltb"]="hltb.elf"
+
+          REPO_NAME["heydemoura/ps5-perf"]="PS5 Perf"
+          REPO_DESC["heydemoura/ps5-perf"]="perf-style sampling profiler: stat, record, report, top and flame graphs for PS5 processes over TCP"
+          REPO_CATEGORY["heydemoura/ps5-perf"]="Utilities"
+          REPO_ICON["heydemoura/ps5-perf"]="ps5-perf"
+          REPO_ASSET["heydemoura/ps5-perf"]="ps5-perf.elf"
 
           PAYLOADS="[]"
 
