@@ -21,7 +21,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           declare -A REPO_NAME REPO_DESC REPO_CATEGORY REPO_ICON REPO_ASSET
-          REPOS=("heydemoura/ps5-localsend" "heydemoura/syncps5" "heydemoura/ps5-hltb" "heydemoura/ps5-perf")
+          REPOS=("heydemoura/ps5-localsend" "heydemoura/syncps5" "heydemoura/ps5-hltb" "heydemoura/ps5-perf" "heydemoura/ps5-web-stream")
 
           REPO_NAME["heydemoura/ps5-localsend"]="PS5 LocalSend"
           REPO_DESC["heydemoura/ps5-localsend"]="Native LocalSend protocol payload for PlayStation 5 with a browser dashboard"
@@ -44,6 +44,12 @@ jobs:
           REPO_CATEGORY["heydemoura/ps5-perf"]="Utilities"
           REPO_ICON["heydemoura/ps5-perf"]="ps5-perf"
           REPO_ASSET["heydemoura/ps5-perf"]="ps5-perf.elf"
+
+          REPO_NAME["heydemoura/ps5-web-stream"]="PS5 Web Stream"
+          REPO_DESC["heydemoura/ps5-web-stream"]="Stream PS5 video and stereo audio to a browser or OBS with a built-in dashboard and fullscreen player"
+          REPO_CATEGORY["heydemoura/ps5-web-stream"]="Streaming"
+          REPO_ICON["heydemoura/ps5-web-stream"]="ps5-web-stream"
+          REPO_ASSET["heydemoura/ps5-web-stream"]="ps5-web-stream.elf"
 
           PAYLOADS="[]"
 
