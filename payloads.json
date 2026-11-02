@@ -64,7 +64,7 @@
       "icon_key": "ps5-perf",
       "details_url": "details/ps5-perf.md",
       "source": "https://github.com/heydemoura/ps5-perf",
-      "release_notes": "First release of ps5-perf, a perf-style sampling profiler payload for the PS5.\n\n**Assets**\n- `ps5-perf.elf`: the payload. Send it to elfldr, e.g. `nc -q0 <ps5> 9021 < ps5-perf.elf`. It listens on TCP port 9077.\n- `ps5perf.py`: the host client (Python 3). It records, symbolizes Sony NIDs and writes perf-script text, folded stacks, an SVG flame graph and reports.\n\nBuilt with ps5-payload-dev SDK v0.45 and tested on firmware 12.20. Kernel struct thread offsets are calibrated at runtime. See the README for commands, sampling modes and limitations.\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.com/claude-code)"
+      "release_notes": "First release of ps5-perf, a perf-style sampling profiler payload for the PS5.\n\n**Assets**\n- `ps5-perf.elf`: the payload. Send it to elfldr, e.g. `nc -q0 <ps5> 9021 < ps5-perf.elf`. It listens on TCP port 9077.\n- `ps5perf.py`: the host client (Python 3). It records, symbolizes Sony NIDs and writes perf-script text, folded stacks, an SVG flame graph and reports.\n\nBuilt with ps5-payload-dev SDK v0.45 and tested on firmware 12.20. Kernel struct thread offsets are calibrated at runtime. See the README for commands, sampling modes and limitations.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)"
     }
   ]
 }
