@@ -81,6 +81,22 @@
       "details_url": "details/ps5-web-stream.md",
       "source": "https://github.com/heydemoura/ps5-web-stream",
       "release_notes": "**Full Changelog**: https://github.com/heydemoura/ps5-web-stream/commits/0.1.0"
+    },
+    {
+      "id": "ps5-memcard",
+      "name": "PS5 Memcard",
+      "filename": "ps5-memcard.elf",
+      "url": "https://github.com/heydemoura/ps5-memcard/releases/download/v0.4.1/ps5-memcard.elf",
+      "description": "Keeps every PS5 and PS4 save mirrored on USB memory cards under /memcard and imports them into any profile from a web page",
+      "version": "v0.4.1",
+      "last_update": "2026-11-10",
+      "category": "Utilities",
+      "checksum": "2ac72d8ef0f295dcd1767bdc156923d35cdf697b65127b379cbbf82886bf2b96",
+      "author": "heydemoura",
+      "icon_key": "ps5-memcard",
+      "details_url": "details/ps5-memcard.md",
+      "source": "https://github.com/heydemoura/ps5-memcard",
+      "release_notes": "ps5-memcard keeps every save on the console (PS5 and PS4 titles, all profiles) copied to USB drives under `/memcard`, and brings any of them back into any profile from a web page.\n\n## Use\n\n1. Plug a USB drive (exFAT or FAT32) into the PS5.\n2. Send `ps5-memcard.elf` to the ELF loader on port 9021:\n\n   ```sh\n   nc -q0 <ps5-ip> 9021 < ps5-memcard.elf\n   ```\n\n3. Open `http://<ps5-ip>:8083/`, or use the **PS5 Memcard** shortcut the payload adds to the Media tab.\n\n## In this version\n\n- The home screen and notification icon no longer has a label written on the card.\n\nTested on firmware 12.20 with one USB drive. Not yet tried on a console: a real game's save (the tests used a synthetic PS5 save), PS4 saves, and two drives at once. Save handling is built on [Garlic SaveMgr](https://github.com/earthonion/garlic-savemgr) by earthonion."
     }
   ]
 }

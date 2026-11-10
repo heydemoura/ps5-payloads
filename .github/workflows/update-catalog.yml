@@ -21,7 +21,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           declare -A REPO_NAME REPO_DESC REPO_CATEGORY REPO_ICON REPO_ASSET
-          REPOS=("heydemoura/ps5-localsend" "heydemoura/syncps5" "heydemoura/ps5-hltb" "heydemoura/ps5-perf" "heydemoura/ps5-web-stream")
+          REPOS=("heydemoura/ps5-localsend" "heydemoura/syncps5" "heydemoura/ps5-hltb" "heydemoura/ps5-perf" "heydemoura/ps5-web-stream" "heydemoura/ps5-memcard")
 
           REPO_NAME["heydemoura/ps5-localsend"]="PS5 LocalSend"
           REPO_DESC["heydemoura/ps5-localsend"]="Native LocalSend protocol payload for PlayStation 5 with a browser dashboard"
@@ -50,6 +50,12 @@ jobs:
           REPO_CATEGORY["heydemoura/ps5-web-stream"]="Streaming"
           REPO_ICON["heydemoura/ps5-web-stream"]="ps5-web-stream"
           REPO_ASSET["heydemoura/ps5-web-stream"]="ps5-web-stream.elf"
+
+          REPO_NAME["heydemoura/ps5-memcard"]="PS5 Memcard"
+          REPO_DESC["heydemoura/ps5-memcard"]="Keeps every PS5 and PS4 save mirrored on USB memory cards under /memcard and imports them into any profile from a web page"
+          REPO_CATEGORY["heydemoura/ps5-memcard"]="Utilities"
+          REPO_ICON["heydemoura/ps5-memcard"]="ps5-memcard"
+          REPO_ASSET["heydemoura/ps5-memcard"]="ps5-memcard.elf"
 
           PAYLOADS="[]"
 
